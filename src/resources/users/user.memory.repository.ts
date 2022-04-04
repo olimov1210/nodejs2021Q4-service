@@ -1,6 +1,6 @@
 import User from './user.model';
 
-let users: User[] = [];
+const users: User[] = [];
 
 /**
  * @returns Returns all users as array
