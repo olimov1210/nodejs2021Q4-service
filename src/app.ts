@@ -19,6 +19,6 @@ app.use('/', (req: Request, res, next) => {
   }
   next();
 });
-app.use('/users', userRouter);
+app.use(userRouter);
 
 export default app;

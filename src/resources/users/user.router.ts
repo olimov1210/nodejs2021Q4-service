@@ -11,4 +11,28 @@ router.route('/users').get((req, res) => {
     .catch((e) => res.status(400).json({ message: e.message }));
 });
 
+router.route('/users/:id').get((req, res) => {
+  usersService
+    .getById(req.params.id)
+    .then((user) => {
+      if (user) res.json(User.toResponse(user));
+      else res.status(404).json({ message: 'user not found' });
+    })
+    .catch((e) => res.status(400).json({ message: e.message }));
+});
+
+router.route('/users').post((req, res) => {
+  usersService
+    .create(req.body)
+    .then((user) => res.status(201).json(User.toResponse(user)))
+    .catch((e) => res.status(400).json({ message: e.message }));
+});
+
+router.route('/users/:id').put((req, res) => {
+  usersService
+    .update(req.params.id, req.body)
+    .then((user) => res.json(User.toResponse(user)))
+    .catch((e) => res.status(400).json({ message: e.message }));
+});
+
 export default router;
