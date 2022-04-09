@@ -35,4 +35,11 @@ router.route('/users/:id').put((req, res) => {
     .catch((e) => res.status(400).json({ message: e.message }));
 });
 
+router.route('/users/:id').delete((req, res) => {
+  usersService
+    .remove(req.params.id)
+    .then(() => res.status(204).json({ message: 'user successfully deleted' }))
+    .catch((e) => res.status(400).json({ message: e.message }));
+});
+
 export default router;

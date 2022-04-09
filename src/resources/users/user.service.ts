@@ -1,4 +1,5 @@
 import * as usersRepo from './user.memory.repository';
+import * as tasksRepo from '../task/task.memory.repository';
 import User from './user.model'
 
 export const getAll = () => Promise.resolve(usersRepo.getAll());
@@ -13,6 +14,8 @@ export const getAll = () => Promise.resolve(usersRepo.getAll());
  export const update = (id: string, data: User) =>
    Promise.resolve(usersRepo.update(id, data));
 
-export const remove = (id: string) => {
-     Promise.resolve(usersRepo.remove(id));
+   export const remove = (id: string) => {
+    tasksRepo.unassignUser(id);
+    return Promise.resolve(usersRepo.remove(id));
   };
+  
